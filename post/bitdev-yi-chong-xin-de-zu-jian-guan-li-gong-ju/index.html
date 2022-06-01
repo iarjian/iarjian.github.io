@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title> bit.dev一种新的组件管理工具 | 风车</title>
+<meta name="description" content="&lt;h3&gt;不知寒暑，不识香臭，不辨是非，&lt;br/&gt;无家国之念，无亲情之观，&lt;br/&gt;无喜乐，无悲欢，与朽木何异？&lt;/h3&gt;">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://iarjian.github.io/favicon.ico?v=1654071935335">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://iarjian.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://iarjian.github.io">
+        <img src="https://iarjian.github.io/images/avatar.png?v=1654071935335" class="site-logo">
+        <h1 class="site-title">风车</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/post/typescript/" class="site-nav">
+            笔记
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      <h3>不知寒暑，不识香臭，不辨是非，<br/>无家国之念，无亲情之观，<br/>无喜乐，无悲欢，与朽木何异？</h3>
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://iarjian.netlify.app" target="_blank">风车</a> | <a class="rss" href="https://iarjian.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title"> bit.dev一种新的组件管理工具</h2>
+            <div class="post-date">2020-06-19</div>
+            
+            <div class="post-content">
+              <figure data-type="image" tabindex="1"><img src="http://img.arjan.cn/quick-start.svg" alt="" loading="lazy"></figure>
+<h2 id="quick-start">Quick Start</h2>
+<blockquote>
+<p>Bit用来管理代码，任何的代码文件、函数、vue组件、angular组件、react组件、node.js中的module都可以作为Bit组件。</p>
+</blockquote>
+<h2 id="setup-vuejs中使用bit">Setup---Vue.js中使用bit</h2>
+<h3 id="全局安装bit">全局安装bit</h3>
+<pre><code class="language-node">npm install bit-bin -g 
+//or 
+yarn global add bit-bin
+</code></pre>
+<h3 id="在项目中初始化">在项目中初始化</h3>
+<pre><code class="language-node">bit init //项目目录下
+</code></pre>
+<h3 id="使用bit-add跟踪组件">使用<code>bit add</code>跟踪组件</h3>
+<pre><code class="language-node">bit add src/components/my-component.vue --id my-component //跟踪指定组件
+
+bit add src/components/* //跟踪src/components所有组件
+
+bit status //验证组件被跟踪，并且没有文件丢失
+</code></pre>
+<h3 id="设置组件的版本">设置组件的版本</h3>
+<pre><code class="language-node">bit tag --all 1.0.0// 给跟踪的所有组件设置发布的版本号
+</code></pre>
+<h3 id="发布">发布</h3>
+<ol>
+<li>
+<h4 id="在bitdev申请账号可以使用github账号登录">在bit.dev申请账号(可以使用github账号登录)</h4>
+</li>
+<li>
+<h4 id="创建一个公共的或私有的集合用以存储组件">创建一个公共的或私有的集合，用以存储组件</h4>
+</li>
+<li>
+<h4 id="在项目中使用bit-login登录bit会自动打开浏览器进行身份验证">在项目中使用<code>bit login</code>登录，Bit会自动打开浏览器进行身份验证</h4>
+</li>
+<li>
+<h4 id="导出发布组件">导出/发布组件：</h4>
+</li>
+</ol>
+<pre><code class="language-node">bit export user_name.collection_name
+</code></pre>
+<blockquote>
+<p>导出后到bit.dev集合上查看,可以为组件创建并保存示例,bit会在集合页面中显示为预览</p>
+</blockquote>
+<figure data-type="image" tabindex="2"><img src="http://img.arjan.cn/TIM%E6%88%AA%E5%9B%BE20200619164638.png" alt="" loading="lazy"></figure>
+<h3 id="安装组件-在其他项目中使用组件">安装组件---在其他项目中使用组件</h3>
+<p>如果使用NPM或Yarn，则NPM应将Bit配置为作用域注册表（Bit登录时Bit会自动配置它）：</p>
+<pre><code class="language-node">npm config set @bit:registry https://node.bit.dev
+</code></pre>
+<p>然后就可以像安装npm插件包一样进行下载安装</p>
+<pre><code class="language-node">npm i @bit/iarjan.demo.demo
+//or
+yarn add @bit/iarjan.demo.demo
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="http://img.arjan.cn/TIM%E6%88%AA%E5%9B%BE20200619163234.png" alt="" loading="lazy"></figure>
+<h3 id="更新组件">更新组件</h3>
+<ol>
+<li>
+<h4 id="更新本地组件">更新本地组件</h4>
+</li>
+</ol>
+<p>本地的组件要想同步远程的更新直接使用导入命令即可，组件的最新版本会被自动导入：</p>
+<pre><code class="language-node">bit import &lt;component_id&gt;
+</code></pre>
+<ol start="2">
+<li>
+<h4 id="修改组件并更新至远程">修改组件并更新至远程</h4>
+</li>
+</ol>
+<p>项目中如果修改了通过 <code>bit import</code> 导入的组件就需要将组件更新至远程，这样其它使用者才可同步此修改。</p>
+<p>当修改组件后运行<code> bit status</code> 命令会提示 modified components 的相关信息，此时可为组件设置新的版本：</p>
+<pre><code class="language-node">bit tag &lt;component_id&gt; &lt;new_version&gt;
+</code></pre>
+<p>然后将其重新导出到远程集合中：</p>
+<pre><code class="language-node">bit export user_name.collection_name
+</code></pre>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://iarjian.github.io/post/han-shu-de-fang-dou-he-jie-liu/">
+                  <h3 class="post-title">
+                    函数的防抖和节流
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>

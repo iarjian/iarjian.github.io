@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Markdown基本语法 | 风车</title>
+<meta name="description" content="&lt;h3&gt;不知寒暑，不识香臭，不辨是非，&lt;br/&gt;无家国之念，无亲情之观，&lt;br/&gt;无喜乐，无悲欢，与朽木何异？&lt;/h3&gt;">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://iarjian.github.io/favicon.ico?v=1654071935335">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://iarjian.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://iarjian.github.io">
+        <img src="https://iarjian.github.io/images/avatar.png?v=1654071935335" class="site-logo">
+        <h1 class="site-title">风车</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/post/typescript/" class="site-nav">
+            笔记
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      <h3>不知寒暑，不识香臭，不辨是非，<br/>无家国之念，无亲情之观，<br/>无喜乐，无悲欢，与朽木何异？</h3>
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://iarjian.netlify.app" target="_blank">风车</a> | <a class="rss" href="https://iarjian.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Markdown基本语法</h2>
+            <div class="post-date">2019-10-24</div>
+            
+              <div class="feature-container" style="background-image: url('https://iarjian.github.io/post-images/markdown-ji-ben-yu-fa.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p>Markdown是一种纯文本格式的标记语言。通过简单的标记语法，它可以使普通文本内容具有一定的格式。</p>
+<!-- more -->
+<h3 id="1标题">1.标题</h3>
+<p>标题使用“#”来标识h1~h6：</p>
+<pre><code class="language-html"># h1
+## h2
+### h3
+#### h4
+##### h5
+###### h6
+</code></pre>
+<h1 id="h1">h1</h1>
+<h2 id="h2">h2</h2>
+<h3 id="h3">h3</h3>
+<h4 id="h4">h4</h4>
+<h5 id="h5">h5</h5>
+<h6 id="h6">h6</h6>
+<h3 id="2字体">2.字体</h3>
+<pre><code>**这是加粗的文字**
+*这是倾斜的文字*`
+***这是斜体加粗的文字***
+~~这是加删除线的文字~~
+</code></pre>
+<p><strong>这是加粗的文字</strong><br>
+<em>这是倾斜的文字</em>`<br>
+<em><strong>这是斜体加粗的文字</strong></em><br>
+<s>这是加删除线的文字</s></p>
+<h3 id="3图片">3.图片</h3>
+<pre><code class="language-html">![图片alt]( http://iarjan.gitee.io/images_bed/img/bg4.png )
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="http://iarjan.gitee.io/images_bed/img/bg4.png" alt="图片alt" loading="lazy"></figure>
+<h3 id="4超链接">4.超链接</h3>
+<pre><code class="language-html">[My blog]( http://arjan.coding.me/ )
+</code></pre>
+<p><a href="http://arjan.coding.me/">My blog</a></p>
+<h3 id="5列表">5.列表</h3>
+<p>Markdown 支持有序列表和无序列表。</p>
+<p>无序列表使用星号、加号或是减号作为列表标记：</p>
+<pre><code class="language-hljs">*   Red
+*   Green
+*   Blue
+</code></pre>
+<p>等同于</p>
+<pre><code>+   Red
++   Green
++   Blue
+</code></pre>
+<p>和</p>
+<pre><code>-   Red
+-   Green
+-   Blue
+</code></pre>
+<ul>
+<li>Red</li>
+<li>Green</li>
+<li>Blue</li>
+</ul>
+<p>有序列表则使用数字接着一个英文句点：</p>
+<pre><code>1.   Red
+2.   Green
+3.   Blue
+</code></pre>
+<h3 id="6分割线">6.分割线</h3>
+<p>在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。可以在星号或是减号中间插入任意数量的空格。下面每种写法都可以建立分隔线：</p>
+<pre><code>* * *
+***
+*****
+- - -
+---------
+</code></pre>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<h3 id="7引用">7.引用</h3>
+<p>Markdown 通过“&gt;”来引用内容，可以在引用开头加一个，也可以在引用每一行的前面都加一个，引用也可以嵌套，示例如下：</p>
+<pre><code>&gt; 这是一段引用
+&gt; &gt; 这是一段二级引用
+</code></pre>
+<blockquote>
+<p>这是一段引用</p>
+<blockquote>
+<p>这是一段二级引用</p>
+</blockquote>
+</blockquote>
+<h3 id="8代码">8.代码</h3>
+<p>如果要标记一小段行内代码，可以用反引号把它包起来（`），示例如下：</p>
+<pre><code>github中`README.md`文件的编写
+</code></pre>
+<p>github中<code>README.md</code>文件的编写</p>
+<p>标记代码段需要使用三个反引号包围代码段，前面三个反引号后紧跟代码所使用语言可使代码高亮</p>
+<pre><code>​```
+	.main{height:200px}
+​```
+</code></pre>
+<pre><code class="language-CSS">	.main{height:200px}
+</code></pre>
+<h3 id="9表格">9.表格</h3>
+<blockquote>
+<p>-:表示内容和标题栏居右对齐<br>
+:-表示内容和标题栏居左对齐<br>
+:-:表示内容和标题栏居中对齐。<br>
+内容和|之间的多余空格会被忽略，每行第一个|和最后一个|可以省略，-的数量至少有一个。</p>
+</blockquote>
+<p>极简方式</p>
+<pre><code class="language-json">|  calss | age |
+| ------------ | ------------ |
+| 1 | 18 |
+| 2 | 20 |
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>calss</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>18</td>
+</tr>
+<tr>
+<td>2</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
+<h4 id="居中对齐">居中对齐</h4>
+<pre><code class="language-json">|  class | age  |
+| :------------: | :------------: |
+| 1 | 18 |
+| 2 | 20 |
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>class</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>18</td>
+</tr>
+<tr>
+<td>2</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
+<h4 id="左对齐">左对齐</h4>
+<pre><code class="language-json">|  class | age  |
+| :------------ | :------------ |
+| 1 | 18 |
+| 2 | 20 |
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>class</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>18</td>
+</tr>
+<tr>
+<td>2</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
+<h4 id="右对齐">右对齐</h4>
+<pre><code class="language-json">|  class | age  |
+| ------------: | ------------: |
+| 1 | 18 |
+| 2 | 20 |
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>class</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>18</td>
+</tr>
+<tr>
+<td>2</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://iarjian.github.io/tag/gCXB8u-vs/" class="tag">
+                    markdown
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://iarjian.github.io/post/js-joi/">
+                  <h3 class="post-title">
+                    js-joi: 一个简易的js链式校验工具
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>使用webpack的require.context实现前端自动化 | 风车</title>
+<meta name="description" content="&lt;h3&gt;不知寒暑，不识香臭，不辨是非，&lt;br/&gt;无家国之念，无亲情之观，&lt;br/&gt;无喜乐，无悲欢，与朽木何异？&lt;/h3&gt;">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://iarjian.github.io/favicon.ico?v=1654071935335">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://iarjian.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://iarjian.github.io">
+        <img src="https://iarjian.github.io/images/avatar.png?v=1654071935335" class="site-logo">
+        <h1 class="site-title">风车</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/post/typescript/" class="site-nav">
+            笔记
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      <h3>不知寒暑，不识香臭，不辨是非，<br/>无家国之念，无亲情之观，<br/>无喜乐，无悲欢，与朽木何异？</h3>
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://iarjian.netlify.app" target="_blank">风车</a> | <a class="rss" href="https://iarjian.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">使用webpack的require.context实现前端自动化</h2>
+            <div class="post-date">2020-06-20</div>
+            
+            <div class="post-content">
+              <h3 id="requirecontext是什么">require.context是什么</h3>
+<p>一个webpack的api,通过require.context()方法来获取模块的上下文,可以通过该方法实现模块的自动导入,该方法主要有3个参数</p>
+<ul>
+<li>要搜索的文件夹目录(路径地址)</li>
+<li>是否开启搜索子目录(true/false)</li>
+<li>匹配文件的正则表达式</li>
+</ul>
+<pre><code class="language-js">//demo
+require.context(&quot;./&quot;,true,/\.vue$/)
+//说明:获取当前目录及子目录下所有的后缀为.vue的文件
+</code></pre>
+<h3 id="自动注册vue全局组件">自动注册Vue全局组件</h3>
+<pre><code class="language-js">const r = require.context(&quot;./&quot;, true, /\.vue$/);
+
+const install = (Vue) =&gt; {
+    if (install.installed) return;
+    install.installed
+    r.keys().forEach(filename =&gt; {
+        const config = r(filename).default
+        Vue.component(config.name, config)//通过组件name进行挂载,需要保证name存在且唯一
+    });
+
+    Vue.directive(&quot;focus&quot;, {
+        bind() { },
+        inserted(el) {
+            el.focus();
+        }
+    })
+}
+
+//确保是正常的环境
+if (typeof window !== &quot;undefined&quot; &amp;&amp; window.Vue) {
+    install(window.Vue);
+}
+
+export default install
+</code></pre>
+<h3 id="路由自动加载">路由自动加载</h3>
+<p>随着业务的提升,在大型单页面应用开发是一般会由多人进行开发,此时应该避免修改公共配置.个人只需要维护个人部分来减少项目冲突</p>
+<h4 id="实现思路">实现思路</h4>
+<ol>
+<li>个人开发部分配置一个index.router.js路由文件管理个人部分路由</li>
+<li>路由规则统一维护router.js,在router.js中通过require.context()方法获取项目中所有个人部分index.router.js实现自动获取项目路由</li>
+</ol>
+<pre><code class="language-js">//index.router.js
+//vue页面命名规则统一 业务名称+路由名称:mode.index.vue/mode.second.vue
+var r = require.context(&quot;./pages&quot;,false,/.vue/);
+var arr = [];
+r.keys().forEach(key =&gt; {
+    var keyarr = key.split(&quot;.&quot;);
+    if (key.indexOf(&quot;index&quot;)!==-1) {
+        arr.push({
+            path:keyarr[1],
+            component:r(key).default
+        })
+    }else{
+        arr.push({
+            path:keyarr[1]+&quot;/&quot;+keyarr[2],
+            component:r(key).default
+        })
+    }
+});
+export default arr;
+</code></pre>
+<pre><code class="language-js">//router.js
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+
+Vue.use(VueRouter)
+
+var r = require.context(&quot;../views&quot;, true, /\.router\.js/);
+
+var arr = [];
+
+r.keys().forEach(item =&gt; {
+  arr = arr.concat(r(item).default);
+});
+const routes = [
+  {
+    path: &quot;/&quot;,
+    component: Home
+  },
+  {
+    path: &quot;/about&quot;,
+    component: () =&gt; import(&quot;../views/About.vue&quot;)
+  },
+  ...arr
+]
+
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
+})
+
+export default router
+
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://iarjian.github.io/tag/FJ_r2mShM/" class="tag">
+                    webpack
+                  </a>
+                
+                  <a href="https://iarjian.github.io/tag/Lil1nmGhQ7/" class="tag">
+                    require.context
+                  </a>
+                
+                  <a href="https://iarjian.github.io/tag/k6V-iWxssv/" class="tag">
+                    前端自动化
+                  </a>
+                
+                  <a href="https://iarjian.github.io/tag/Eh31PwOBqR/" class="tag">
+                    路由自动加载
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://iarjian.github.io/post/bitdev-yi-chong-xin-de-zu-jian-guan-li-gong-ju/">
+                  <h3 class="post-title">
+                     bit.dev一种新的组件管理工具
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
